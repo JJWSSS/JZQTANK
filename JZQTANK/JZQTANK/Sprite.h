@@ -1,7 +1,8 @@
 #pragma once
 
-#include <d3d9.h>
-#include <d3dx9.h>
+#include "DirectX.h"
+#include <string>
+using namespace std;
 
 class Sprite
 {
@@ -10,8 +11,13 @@ public:
 	LPD3DXSPRITE sprite;
 	float x, y;
 	D3DCOLOR color;
+	string filename;
+	int scaling;
 
-	Sprite();
+	bool LoadTexture(TCHAR* f,D3DCOLOR transcolor = D3DCOLOR_XRGB(0, 0, 0));
+	void SpriteDraw();
+	bool SpriteInit();
+	Sprite(string f);
 	~Sprite();
-
+	void SpriteShutdown();
 };

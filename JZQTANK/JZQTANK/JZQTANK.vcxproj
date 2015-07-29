@@ -83,10 +83,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DirectX.cpp" />
+    <ClCompile Include="GameControl.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirectX.h" />
+    <ClInclude Include="GameControl.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

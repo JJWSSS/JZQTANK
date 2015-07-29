@@ -21,9 +21,27 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DirectX.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameControl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameControl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

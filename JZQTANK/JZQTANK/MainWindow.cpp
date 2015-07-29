@@ -1,81 +1,25 @@
-#include <Windows.h>
+//#include "DirectX.h"
+#include "Sprite.h"
+//#include "GameControl.h"
 
-class WindowControl
-{
-public:
-	int page;
-	bool gameover;
-	bool fullorwindowed;
-	MSG message;
-	WNDCLASSEX wc;
-	HWND window;
-	int SCREENW;
-	int SCREENH;
-	TCHAR APPTITLE[256] = TEXT("JZQTANK");
-	WindowControl();
-	void WindowInit(HINSTANCE hInstance);
-	void FullorWindowed();
-};
+extern DirectX gc;
 
-WindowControl wcontrol;
+Sprite s("splash.bmp");
 
-LRESULT WINAPI WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-WindowControl::WindowControl() :SCREENW(1366), SCREENH(768), fullorwindowed(true),gameover(false), page(0)
-{}
-
-void WindowControl::WindowInit(HINSTANCE hInstance)
-{
-	wc.cbSize = sizeof(WNDCLASSEX);
-	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc = (WNDPROC)WinProc;
-	wc.cbClsExtra = 0;
-	wc.cbWndExtra = 0;
-	wc.hInstance = hInstance;
-	wc.hIcon = NULL;
-	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wc.lpszMenuName = NULL;
-	wc.lpszClassName = APPTITLE;
-	wc.hIconSm = NULL;
-	RegisterClassEx(&wc);
-
-	window = CreateWindow(APPTITLE, APPTITLE,
-		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-		SCREENW, SCREENH, NULL, NULL, hInstance, NULL);
-}
-
-void WindowControl::FullorWindowed()
-{
-	if (!fullorwindowed)
-	{
-		fullorwindowed = true;
-		MessageBeep(0);
-		SetWindowLong(window, GWL_STYLE, WS_TILEDWINDOW);
-		SetWindowPos(window, HWND_TOPMOST, 100, 100, 700, 500, SWP_SHOWWINDOW);
-	}
-	else
-	{
-		fullorwindowed = false;
-		HWND hwnd;
-		RECT rc;
-		hwnd = GetDesktopWindow();
-		GetWindowRect(hwnd, &rc);
-		SetWindowLong(window, GWL_STYLE, WS_BORDER);
-		SetWindowPos(window, HWND_TOPMOST, 0, 0, rc.right, rc.bottom, SWP_SHOWWINDOW);
-	}
-}
 LRESULT WINAPI WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
 	case WM_DESTROY:
-		wcontrol.gameover = true;
+		gc.gameover = true;
 		PostQuitMessage(0);
 		return 0;
 		break;
 	case WM_RBUTTONDOWN:
-		wcontrol.FullorWindowed();
+		gc.FullorWindowed();
+		break;
+	case WM_LBUTTONDOWN:
+		s.SpriteShutdown();
 		break;
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
@@ -83,21 +27,46 @@ LRESULT WINAPI WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	wcontrol.WindowInit(hInstance);
-	if (wcontrol.window == 0)return 0;
-	wcontrol.FullorWindowed();
+	gc.wc.cbSize = sizeof(WNDCLASSEX);
+	gc.wc.style = CS_HREDRAW | CS_VREDRAW;
+	gc.wc.lpfnWndProc = (WNDPROC)WinProc;
+	gc.wc.cbClsExtra = 0;
+	gc.wc.cbWndExtra = 0;
+	gc.wc.hInstance = hInstance;
+	gc.wc.hIcon = NULL;
+	gc.wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	gc.wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	gc.wc.lpszMenuName = NULL;
+	gc.wc.lpszClassName = gc.APPTITLE;
+	gc.wc.hIconSm = NULL;
+	RegisterClassEx(&gc.wc);
 
-	ShowWindow(wcontrol.window, nCmdShow);
-	UpdateWindow(wcontrol.window);
+	gc.window = CreateWindow(gc.APPTITLE, gc.APPTITLE,
+		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+		gc.SCREENW, gc.SCREENH, NULL, NULL, hInstance, NULL);
 
-	while (!wcontrol.gameover)
+	if (gc.window == 0)return 0;
+	gc.FullorWindowed();
+
+	ShowWindow(gc.window, nCmdShow);
+	UpdateWindow(gc.window);
+
+	gc.D3DInit();
+	s.scaling = 3;
+	s.x = 119;
+	s.y = 51;
+	s.SpriteInit();
+	if(!s.LoadTexture(TEXT("splash.bmp")))return 11;
+
+	while (!gc.gameover)
 	{
-		if (PeekMessage(&wcontrol.message, NULL, 0, 0, PM_REMOVE))
+		if (PeekMessage(&gc.message, NULL, 0, 0, PM_REMOVE))
 		{
-			TranslateMessage(&wcontrol.message);
-			DispatchMessage(&wcontrol.message);
+			TranslateMessage(&gc.message);
+			DispatchMessage(&gc.message);
 		}
+		s.SpriteDraw();
 	}
 
-	return wcontrol.message.wParam;
+	return gc.message.wParam;
 }
