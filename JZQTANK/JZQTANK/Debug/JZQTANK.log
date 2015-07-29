@@ -1,0 +1,13 @@
+﻿生成启动时间为 2015/7/29 11:21:04。
+     1>项目“E:\code\JZQTANK\JZQTANK\JZQTANK\JZQTANK\JZQTANK.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Visual Studio 2015 RC\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt MainWindow.cpp
+         MainWindow.cpp
+       Link:
+         D:\Visual Studio 2015 RC\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib dsound.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.lib" /MACHINE:X86 Debug\MainWindow.obj
+         JZQTANK.vcxproj -> E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.exe
+     1>已完成生成项目“E:\code\JZQTANK\JZQTANK\JZQTANK\JZQTANK\JZQTANK.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.01
