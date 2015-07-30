@@ -4,10 +4,10 @@
 
 DirectX gc;
 
-Sprite::Sprite(string f)
+Sprite::Sprite()
 {
 	scaling = 1;
-	filename = f;
+	//filename = f;
 	image = NULL;
 	sprite = NULL;
 	color = D3DCOLOR_XRGB(255, 255, 255);
@@ -23,7 +23,7 @@ bool Sprite::LoadTexture(TCHAR* f,D3DCOLOR transcolor)
 {
 	D3DXIMAGE_INFO info;
 	HRESULT result = D3DXGetImageInfoFromFile(f, &info);
-	if (result != D3D_OK)return NULL;
+	if (result != D3D_OK)return false;
 
 	result = D3DXCreateTextureFromFileEx(
 		gc.d3ddev, f, info.Width*scaling, info.Height*scaling, 1,
@@ -45,7 +45,7 @@ void Sprite::SpriteDraw()
 	{
 		sprite->Begin(D3DXSPRITE_ALPHABLEND);
 		D3DXVECTOR3 pos(x, y, 0);
-		sprite->Draw(image, NULL, NULL, &pos, D3DCOLOR_XRGB(255, 255, 255));
+		sprite->Draw(image, NULL, NULL, &pos, color);
 		sprite->End();
 
 	}

@@ -11,13 +11,13 @@ public:
 	LPD3DXSPRITE sprite;
 	float x, y;
 	D3DCOLOR color;
-	string filename;
+	//string filename;
 	int scaling;
 
 	bool LoadTexture(TCHAR* f,D3DCOLOR transcolor = D3DCOLOR_XRGB(0, 0, 0));
-	void SpriteDraw();
+	virtual void SpriteDraw();
 	bool SpriteInit();
-	Sprite(string f);
-	~Sprite();
+	Sprite();
+	virtual ~Sprite();
 	void SpriteShutdown();
 };

@@ -4,8 +4,6 @@
 
 extern DirectX gc;
 
-Sprite s("splash.bmp");
-
 LRESULT WINAPI WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -52,11 +50,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	UpdateWindow(gc.window);
 
 	gc.D3DInit();
-	s.scaling = 3;
-	s.x = 119;
-	s.y = 51;
-	s.SpriteInit();
-	if(!s.LoadTexture(TEXT("splash.bmp")))return 11;
 
 	while (!gc.gameover)
 	{
