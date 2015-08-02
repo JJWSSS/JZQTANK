@@ -9,6 +9,7 @@ class Sprite
 public:
 	LPDIRECT3DTEXTURE9 image;
 	LPD3DXSPRITE sprite;
+	int width, height;
 	float x, y;
 	D3DCOLOR color;
 	//string filename;

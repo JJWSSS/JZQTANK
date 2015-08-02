@@ -7,6 +7,7 @@ DirectX gc;
 Sprite::Sprite()
 {
 	scaling = 1;
+	width = height = 0;
 	//filename = f;
 	image = NULL;
 	sprite = NULL;
@@ -45,9 +46,8 @@ void Sprite::SpriteDraw()
 	{
 		sprite->Begin(D3DXSPRITE_ALPHABLEND);
 		D3DXVECTOR3 pos(x, y, 0);
-		sprite->Draw(image, NULL, NULL, &pos, color);
+		sprite->Draw(image, NULL, NULL, &pos, D3DCOLOR_XRGB(255, 255, 255));
 		sprite->End();
-
 	}
 	gc.d3ddev->EndScene();
 	gc.d3ddev->Present(NULL, NULL, NULL, NULL);

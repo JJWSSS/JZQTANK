@@ -1,7 +1,7 @@
 #include "DirectX.h"
 
 DirectX::DirectX() :d3d(NULL), d3ddev(NULL), backbuffer(NULL), surface(NULL), di(NULL), dinputdev(NULL),
-SCREENW(1366), SCREENH(768), fullorwindowed(true), gameover(false), page(0),APPTITLE(TEXT("JZQTANK"))
+SCREENW(1366), SCREENH(768), fullorwindowed(true), gameover(false), page(0),APPTITLE(TEXT("JZQTANK")),lastpage(-1)
 {}
 
 void DirectX::FullorWindowed()

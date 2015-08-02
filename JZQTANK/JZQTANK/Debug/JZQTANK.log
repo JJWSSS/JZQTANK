@@ -1,9 +1,52 @@
-﻿生成启动时间为 2015/7/29 17:34:16。
+﻿生成启动时间为 2015/8/1 17:52:18。
      1>项目“E:\code\JZQTANK\JZQTANK\JZQTANK\JZQTANK\JZQTANK.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         D:\Visual Studio 2015 RC\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Sprite.cpp
+         D:\Visual Studio 2015 RC\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt DirectX.cpp GameControl.cpp GameObject.cpp MainWindow.cpp Sprite.cpp
+         MainWindow.cpp
+         d:\directx sdk\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\mainwindow.cpp(61): warning C4553: “==”: 运算符不起任何作用；是否是有意使用“=”的?
+         GameControl.cpp
+         d:\directx sdk\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(41): warning C4305: “return”: 从“int”到“bool”截断
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(42): warning C4305: “return”: 从“int”到“bool”截断
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(46): warning C4305: “return”: 从“int”到“bool”截断
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(47): warning C4305: “return”: 从“int”到“bool”截断
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(80): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(81): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(96): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(97): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(110): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(111): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(126): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(127): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(140): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(141): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(156): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(157): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(170): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(171): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(186): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(187): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(200): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(201): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(216): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(217): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(230): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(231): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+         DirectX.cpp
+         d:\directx sdk\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+         正在生成代码...
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gamecontrol.cpp(276): warning C4715: “SurfaceInit”: 不是所有的控件路径都返回值
+         正在编译...
          Sprite.cpp
          d:\directx sdk\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+         GameObject.cpp
+         d:\directx sdk\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gameobject.cpp(112): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gameobject.cpp(113): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gameobject.cpp(114): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+     1>e:\code\jzqtank\jzqtank\jzqtank\jzqtank\gameobject.cpp(115): warning C4244: “=”: 从“float”转换到“LONG”，可能丢失数据
+         正在生成代码...
        Link:
          D:\Visual Studio 2015 RC\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib dsound.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\code\JZQTANK\JZQTANK\JZQTANK\Debug\JZQTANK.lib" /MACHINE:X86 Debug\DirectX.obj
          Debug\GameControl.obj
@@ -15,4 +58,4 @@
 
 生成成功。
 
-已用时间 00:00:02.40
+已用时间 00:00:04.10

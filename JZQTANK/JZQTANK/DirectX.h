@@ -21,7 +21,7 @@ public:
 	LPDIRECTINPUTDEVICE8 dinputdev;
 	char keys[256];
 	//Window
-	int page;
+	int page, lastpage;
 	bool gameover;
 	bool fullorwindowed;
 	MSG message;

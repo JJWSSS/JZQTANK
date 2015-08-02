@@ -7,7 +7,6 @@ Tank::Tank():Sprite()
 {
 	frame = 0;
 	columns = 1;
-	width = height = 0;
 	rotation = 0.0f;
 	startframe = endframe = 0;
 	direction = 1;
@@ -39,22 +38,29 @@ Tank::~Tank(){}
 
 void Tank::SpriteDraw()
 {
-	D3DXVECTOR3 position(x, y, 0);
+	//gc.d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	D3DXVECTOR2 trans(x, y);
+	D3DXMATRIX mat;
+	D3DXMatrixTransformation2D(&mat, NULL, 0, NULL, NULL, rotation, &trans);
+	//tell sprite object to use the transform  
+	sprite->SetTransform(&mat);
+
+	//D3DXVECTOR3 position(x, y, 0);
 	//D3DCOLOR white = D3DCOLOR_XRGB(255, 255, 255);
 
 	RECT rect;
 	if (type > 3)
 	{
-		rect.left = (frame % columns) * width + (type - 4)*width;
-		rect.top = (frame / columns) * height + height * 4;
+		rect.left = ((frame % columns) * width + (type - 4)*width)*scaling;
+		rect.top = ((frame / columns) * height + height * 4)*scaling;
 	}
 	else
 	{
-		rect.left = (frame % columns) * width + type*width;
-		rect.top = (frame / columns) * height;
+		rect.left = ((frame % columns) * width + type*width)*scaling;
+		rect.top = (frame / columns) * height*scaling;
 	}
-	rect.right = rect.left + width;
-	rect.bottom = rect.top + height;
+	rect.right = rect.left + width*scaling;
+	rect.bottom = rect.top + height*scaling;
 	if (!gc.d3ddev)return;
 
 	gc.d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &gc.backbuffer);
@@ -62,13 +68,68 @@ void Tank::SpriteDraw()
 	if (SUCCEEDED(gc.d3ddev->BeginScene()))
 	{
 		sprite->Begin(D3DXSPRITE_ALPHABLEND);
-		D3DXVECTOR3 pos(x, y, 0);
-		sprite->Draw(image, &rect, NULL, &position, color);
+		//D3DXVECTOR3 pos(x, y, 0);
+		sprite->Draw(image, &rect, NULL, NULL, color);
+		sprite->End();
+	}
+	gc.d3ddev->EndScene();
+	gc.d3ddev->Present(NULL, NULL, NULL, NULL);
+}
+
+void Tank::SpriteDraw(int w)
+{
+	D3DXVECTOR2 trans(x, y);
+	D3DXMATRIX mat;
+	D3DXMatrixTransformation2D(&mat, NULL, 0, NULL, NULL, rotation, &trans);
+	//tell sprite object to use the transform  
+	sprite->SetTransform(&mat);
+
+	RECT rect;
+	rect.left = ((frame % columns) * width + environment*w)*scaling;
+	rect.top = (frame / columns) * height*scaling;
+	rect.right = rect.left + width*scaling;
+	rect.bottom = rect.top + height*scaling;
+
+	if (!gc.d3ddev)return;
+
+	gc.d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &gc.backbuffer);
+
+	if (SUCCEEDED(gc.d3ddev->BeginScene()))
+	{
+		sprite->Begin(D3DXSPRITE_ALPHABLEND);
+		//D3DXVECTOR3 pos(x, y, 0);
+		sprite->Draw(image, &rect, NULL, NULL, color);
 		sprite->End();
 
 	}
 	gc.d3ddev->EndScene();
 	gc.d3ddev->Present(NULL, NULL, NULL, NULL);
+}
+
+RECT Tank::GetNowRECT()
+{
+	RECT rc;
+	rc.left = x;
+	rc.top = y;
+	rc.right = x + width*scaling;
+	rc.bottom = y + height*scaling;
+	return rc;
+}
+
+int Tank::HitTest(Sprite sprite1, Sprite sprite2)
+{
+	RECT rect1;
+	rect1.left = (long)sprite1.x;
+	rect1.top = (long)sprite1.y;
+	rect1.right = (long)sprite1.x + sprite1.width * sprite1.scaling;
+	rect1.bottom = (long)sprite1.y + sprite1.height * sprite1.scaling;
+	RECT rect2;
+	rect2.left = (long)sprite2.x;
+	rect2.top = (long)sprite2.y;
+	rect2.right = (long)sprite2.x + sprite2.width * sprite2.scaling;
+	rect2.bottom = (long)sprite2.y + sprite2.height * sprite2.scaling;
+	RECT dest; //ignored  
+	return IntersectRect(&dest, &rect1, &rect2);
 }
 
 Bullet::Bullet():Tank()
@@ -175,4 +236,34 @@ void MyTank::Move()
 		SpriteDraw();
 		lastmovement = 4;
 	}
+}
+
+void Bullet::SpriteDraw()
+{
+	D3DXVECTOR2 trans(x, y);
+	D3DXMATRIX mat;
+	D3DXMatrixTransformation2D(&mat, NULL, 0, NULL, NULL, rotation, &trans);
+	//tell sprite object to use the transform  
+	sprite->SetTransform(&mat);
+
+	RECT rect;
+	rect.left = (frame % columns) * width *scaling;
+	rect.top = (frame / columns) * height*scaling;
+	rect.right = rect.left + width*scaling;
+	rect.bottom = rect.top + height*scaling;
+
+	if (!gc.d3ddev)return;
+
+	gc.d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &gc.backbuffer);
+
+	if (SUCCEEDED(gc.d3ddev->BeginScene()))
+	{
+		sprite->Begin(D3DXSPRITE_ALPHABLEND);
+		//D3DXVECTOR3 pos(x, y, 0);
+		sprite->Draw(image, &rect, NULL, NULL, color);
+		sprite->End();
+
+	}
+	gc.d3ddev->EndScene();
+	gc.d3ddev->Present(NULL, NULL, NULL, NULL);
 }

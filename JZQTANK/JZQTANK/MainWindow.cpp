@@ -1,6 +1,6 @@
 //#include "DirectX.h"
 #include "Sprite.h"
-//#include "GameControl.h"
+#include "GameControl.h"
 
 extern DirectX gc;
 
@@ -11,13 +11,9 @@ LRESULT WINAPI WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		gc.gameover = true;
 		PostQuitMessage(0);
-		return 0;
 		break;
 	case WM_RBUTTONDOWN:
 		gc.FullorWindowed();
-		break;
-	case WM_LBUTTONDOWN:
-		s.SpriteShutdown();
 		break;
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
@@ -33,7 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	gc.wc.hInstance = hInstance;
 	gc.wc.hIcon = NULL;
 	gc.wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-	gc.wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	gc.wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	gc.wc.lpszMenuName = NULL;
 	gc.wc.lpszClassName = gc.APPTITLE;
 	gc.wc.hIconSm = NULL;
@@ -44,13 +40,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		gc.SCREENW, gc.SCREENH, NULL, NULL, hInstance, NULL);
 
 	if (gc.window == 0)return 0;
-	gc.FullorWindowed();
+	//gc.FullorWindowed();
 
 	ShowWindow(gc.window, nCmdShow);
 	UpdateWindow(gc.window);
 
-	gc.D3DInit();
-
+	//if (!gc.D3DInit())return 12;
+	if (!GameInit())return 10;
+	if (!SurfaceInit())return 11;
+	//GameDraw();
 	while (!gc.gameover)
 	{
 		if (PeekMessage(&gc.message, NULL, 0, 0, PM_REMOVE))
@@ -58,8 +56,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			TranslateMessage(&gc.message);
 			DispatchMessage(&gc.message);
 		}
-		s.SpriteDraw();
+		if (gc.lastpage != gc.page)
+		{
+			if (!SurfaceInit())gc.gameover == true;
+		}
+		//if (!SurfaceInit())gc.gameover == true;
+		GameDraw();
+		GameInput();
 	}
-
+	//while (1) {};
 	return gc.message.wParam;
 }
