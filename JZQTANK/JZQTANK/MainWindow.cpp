@@ -40,14 +40,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		gc.SCREENW, gc.SCREENH, NULL, NULL, hInstance, NULL);
 
 	if (gc.window == 0)return 0;
-	//gc.FullorWindowed();
+	gc.FullorWindowed();
 
 	ShowWindow(gc.window, nCmdShow);
 	UpdateWindow(gc.window);
 
 	//if (!gc.D3DInit())return 12;
 	if (!GameInit())return 10;
-	if (!SurfaceInit())return 11;
+	//if (!SurfaceInit())return 11;
 	//GameDraw();
 	while (!gc.gameover)
 	{
@@ -58,8 +58,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		if (gc.lastpage != gc.page)
 		{
-			if (!SurfaceInit())gc.gameover == true;
+			if (!SurfaceInit())
+			{
+				gc.gameover = true;
+			}
+			if (!TSpriteInit())
+			{
+				gc.gameover = true;
+			}
 		}
+		gc.dinputdev->GetDeviceState(sizeof(gc.keys), (LPVOID)gc.keys);
 		//if (!SurfaceInit())gc.gameover == true;
 		GameDraw();
 		GameInput();

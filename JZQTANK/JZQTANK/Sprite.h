@@ -13,12 +13,12 @@ public:
 	float x, y;
 	D3DCOLOR color;
 	//string filename;
-	int scaling;
+	float scaling;
 
 	bool LoadTexture(TCHAR* f,D3DCOLOR transcolor = D3DCOLOR_XRGB(0, 0, 0));
 	virtual void SpriteDraw();
 	bool SpriteInit();
 	Sprite();
 	virtual ~Sprite();
-	void SpriteShutdown();
+	//void SpriteShutdown();
 };

@@ -31,21 +31,19 @@ bool GameInit()
 
 bool SurfaceInit()
 {
-	gc.lastpage = gc.page;
+	//gc.lastpage = gc.page;
 	int surface[13][13];
 	if (gc.page == 0)
 	{
 		MainSurface.scaling = 3;
 		MainSurface.x = 119;
 		MainSurface.y = 51;
-		if (!MainSurface.SpriteInit())return 11;
-		if (!MainSurface.LoadTexture(TEXT("graphics\\splash.bmp")))return 11;
+		if (!MainSurface.LoadTexture(TEXT("graphics\\splash.bmp")))return false;
 		MainTank.scaling = 3;
 		MainTank.x = 380;
 		MainTank.y = 560;
-		if (!MainTank.SpriteInit())return 11;
-		if (!MainTank.LoadTexture(TEXT("graphics\\player1.bmp")))return 11;
-		MainSurface.SpriteDraw();
+		if (!MainTank.LoadTexture(TEXT("graphics\\player1.bmp")))return false;
+		//MainSurface.SpriteDraw();
 		MainTank.type = 1;
 		MainTank.columns = 2;
 		MainTank.frame = 2;
@@ -77,9 +75,11 @@ bool SurfaceInit()
 					x.height = 16;
 					x.columns = 2;
 					x.frame = 0;
-					x.x = STARTX + 32 * i;
-					x.y = STARTY + 32 * j;
-					x.LoadTexture(TEXT("graphics\\tile.bmp"));
+					x.scaling = 1.5;
+					x.x = STARTX + 32 * j*x.scaling;
+					x.y = STARTY + 32 * i*x.scaling;
+					//if (!x.SpriteInit())return false;
+					if (!x.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
 					if (surface[i][j] == 1)
 					{
 						x.environment = 0;
@@ -103,13 +103,15 @@ bool SurfaceInit()
 				if (surface[i][j] == 2 || surface[i][j] == 7)
 				{
 					Tank x;
-					x.width = 32;
-					x.height = 16;
-					x.columns = 1;
+					x.width = 16;
+					x.height = 32;
+					x.columns = 2;
 					x.frame = 1;
-					x.x = STARTX + 32 * i;
-					x.y = STARTY + 32 * j + 16;
-					x.LoadTexture(TEXT("graphics\\tile.bmp"));
+					x.scaling = 1.5;
+					x.x = STARTX + (32 * j + 16)*x.scaling;
+					x.y = STARTY + 32 * i*x.scaling;
+					//if (!x.SpriteInit())return false;
+					if (!x.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
 					if (surface[i][j] == 2)
 					{
 						x.environment = 0;
@@ -137,9 +139,11 @@ bool SurfaceInit()
 					x.height = 16;
 					x.columns = 2;
 					x.frame = 0;
-					x.x = STARTX + 32 * i;
-					x.y = STARTY + 32 * j + 16;
-					x.LoadTexture(TEXT("graphics\\tile.bmp"));
+					x.scaling = 1.5;
+					x.x = STARTX + 32 * j*x.scaling;
+					x.y = STARTY + (32 * i + 16)*x.scaling;
+					//if (!x.SpriteInit())return false;
+					if (!x.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
 					if (surface[i][j] == 3)
 					{
 						x.environment = 0;
@@ -167,9 +171,12 @@ bool SurfaceInit()
 					x.height = 32;
 					x.columns = 2;
 					x.frame = 0;
-					x.x = STARTX + 32 * i;
-					x.y = STARTY + 32 * j;
-					x.LoadTexture(TEXT("graphics\\tile.bmp"));
+					x.scaling = 1.5;
+					x.x = STARTX + 32 * j*x.scaling;
+					x.y = STARTY + 32 * i*x.scaling;
+					//x.scaling = 1.5;
+					//if (!x.SpriteInit())return false;
+					if (!x.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
 					if (surface[i][j] == 4)
 					{
 						x.environment = 0;
@@ -197,9 +204,11 @@ bool SurfaceInit()
 					x.height = 32;
 					x.columns = 1;
 					x.frame = 0;
-					x.x = STARTX + 32 * i;
-					x.y = STARTY + 32 * j;
-					x.LoadTexture(TEXT("graphics\\tile.bmp"));
+					x.scaling = 1.5;
+					x.x = STARTX + 32 * j*x.scaling;
+					x.y = STARTY + 32 * i*x.scaling;
+					//if (!x.SpriteInit())return false;
+					if (!x.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
 					if (surface[i][j] == 5)
 					{
 						x.environment = 0;
@@ -207,7 +216,7 @@ bool SurfaceInit()
 					}
 					else
 					{
-						x.environment = 0;
+						x.environment = 1;
 						slabs.push_back(x);
 					}
 					RECT* rc = new RECT[16];
@@ -227,9 +236,11 @@ bool SurfaceInit()
 					x.height = 32;
 					x.columns = 1;
 					x.frame = 0;
-					x.x = STARTX + 32 * i;
-					x.y = STARTY + 32 * j;
-					x.LoadTexture(TEXT("graphics\\tile.bmp"));
+					x.scaling = 1.5;
+					x.x = STARTX + 32 * j*x.scaling;
+					x.y = STARTY + 32 * i*x.scaling;
+					//if (!x.SpriteInit())return false;
+					if (!x.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
 					if (surface[i][j] == 14)
 					{
 						x.environment = 2;
@@ -241,78 +252,134 @@ bool SurfaceInit()
 						slabs.push_back(x);
 					}
 				}
-				home.width = 32;
-				home.height = 32;
-				home.frame = 0;
-				home.columns = 1;
-				home.environment = 5;
-				home.x = STARTX + 32 * 6;
-				home.y = STARTY + 12 * 32;
-				home.LoadTexture(TEXT("graphics\\tile.bmp"));
-				player1.width = 28;
-				player1.height = 28;
-				player1.frame = 0;
-				player1.columns = 2;
-				player1.lastmovement = 1;
-				player1.x = STARTX + 4 * 32;
-				player1.y = STARTY + 12 * 32;
-				//player1.scaling = 1.14;
-				player1.LoadTexture(TEXT("graphics\\player1.bmp"));
-				if(choice == 2)
-				{
-					player2.width = 28;
-					player2.height = 28;
-					player2.frame = 0;
-					player2.columns = 2;
-					player2.lastmovement = 1;
-					player2.x = STARTX + 8 * 32;
-					player2.y = STARTY + 12 * 32;
-					//player2.scaling = 1.14;
-					player2.LoadTexture(TEXT("graphics\\player2.bmp"));
-				}
 			}
 		}
+		home.width = 32;
+		home.height = 32;
+		home.frame = 0;
+		home.columns = 1;
+		home.environment = 5;
+		home.scaling = 1.5;
+		home.x = STARTX + 32 * 6* home.scaling;
+		home.y = STARTY + 12 * 32* home.scaling;
+		//if (!home.SpriteInit())return false;
+		if (!home.LoadTexture(TEXT("graphics\\tile.bmp")))return false;
+		player1.width = 28;
+		player1.height = 28;
+		player1.frame = 0;
+		player1.columns = 2;
+		player1.lastmovement = 1;
+		player1.scaling = 1.5;
+		player1.x = STARTX + 4 * 32* player1.scaling;
+		player1.y = STARTY + 12 * 32* player1.scaling;
+		//player1.scaling = 1.14;
+		//if (!player1.SpriteInit())return false;
+		if (!player1.LoadTexture(TEXT("graphics\\player1.bmp")))return false;
+		if (choice == 2)
+		{
+			player2.width = 28;
+			player2.height = 28;
+			player2.frame = 0;
+			player2.columns = 2;
+			player2.lastmovement = 1;
+			player2.scaling = 1.5;
+			player2.x = STARTX + 8 * 32* player2.scaling;
+			player2.y = STARTY + 12 * 32* player2.scaling;
+			//player2.scaling = 1.14;
+			//if (!player2.SpriteInit())return false;
+			if (!player2.LoadTexture(TEXT("graphics\\player2.bmp")))return false;
+		}
 	}
+}
+
+bool TSpriteInit()
+{
+	gc.d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	gc.lastpage = gc.page;
+	if (gc.page == 0)
+	{
+		if (!MainSurface.SpriteInit())return false;
+		if (!MainTank.SpriteInit())return false;
+	}
+	else
+	{
+		//if (gc.lastpage != gc.page)gc.d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+		//player1.SpriteDraw();
+		list<Bullet>::iterator bulleti;
+		bulleti = bullets.begin();
+		for (bulleti = bullets.begin(); bulleti != bullets.end(); ++bulleti)
+		{
+			if (!(*bulleti).SpriteInit())return false;
+		}
+		list<EnemyTank>::iterator enemyi;
+		for (enemyi = enemytanks.begin(); enemyi != enemytanks.end(); ++enemyi)
+		{
+			if(!(*enemyi).SpriteInit())return false;
+		}
+		list<Tank>::iterator tanki;
+		tanki = bricks.begin();
+		for (tanki = bricks.begin(); tanki != bricks.end(); ++tanki)
+		{
+			if(!(*tanki).SpriteInit())return false;
+		}
+		for (tanki = slabs.begin(); tanki != slabs.end(); ++tanki)
+		{
+			if(!(*tanki).SpriteInit())return false;
+		}
+		tanki = lawnsrivers.begin();
+		for (tanki = lawnsrivers.begin(); tanki != lawnsrivers.end(); ++tanki)
+		{
+			if (!(*tanki).SpriteInit())return false;
+		}
+		if(!home.SpriteInit())return false;
+		if(!player1.SpriteInit())return false;
+		if(choice==2)
+		{
+			if(!player2.SpriteInit())return false;
+		}
+	}
+	return true;
 }
 
 void GameDraw()
 {
 	if (gc.page == 0)
 	{
+		//if(gc.lastpage!=gc.page)gc.d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 		MainSurface.SpriteDraw();
 		MainTank.SpriteDraw();
 	}
 	else
 	{
+		//if (gc.lastpage != gc.page)gc.d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+		//player1.SpriteDraw();
 		list<Bullet>::iterator bulleti;
 		bulleti = bullets.begin();
-		while (bulleti != bullets.end())
+		for (bulleti = bullets.begin(); bulleti != bullets.end();++bulleti)
 		{
 			(*bulleti).SpriteDraw();
 		}
 		list<EnemyTank>::iterator enemyi;
-		enemyi = enemytanks.begin();
-		while (enemyi != enemytanks.end())
+		for (enemyi = enemytanks.begin(); enemyi != enemytanks.end();++enemyi)
 		{
 			(*enemyi).SpriteDraw();
 		}
 		list<Tank>::iterator tanki;
 		tanki = bricks.begin();
-		while (tanki != bricks.end())
+		for (tanki = bricks.begin(); tanki != bricks.end();++tanki)
 		{
 			(*tanki).SpriteDraw(32);
 		}
-		tanki = slabs.begin();
-		while (tanki != slabs.end())
+		for (tanki = slabs.begin(); tanki != slabs.end();++tanki)
 		{
 			(*tanki).SpriteDraw(32);
 		}
 		tanki = lawnsrivers.begin();
-		while (tanki != lawnsrivers.end())
+		for (tanki = lawnsrivers.begin(); tanki != lawnsrivers.end();++tanki)
 		{
 			(*tanki).SpriteDraw(32);
 		}
-		home.SpriteDraw();
+		home.SpriteDraw(32);
 		if (choice == 1)
 		{
 			player1.SpriteDraw();
@@ -323,11 +390,12 @@ void GameDraw()
 			player2.SpriteDraw();
 		}
 	}
+	//gc.lastpage = gc.page;
 }
 
 void GameInput()
 {
-	gc.dinputdev->GetDeviceState(sizeof(gc.keys), (LPVOID)gc.keys);
+	//gc.dinputdev->GetDeviceState(sizeof(gc.keys), (LPVOID)gc.keys);
 	if (gc.page == 0)
 	{
 		if (gc.keys[DIK_ESCAPE])
@@ -352,6 +420,7 @@ void GameInput()
 		}
 		if (gc.keys[DIK_RETURN])
 		{
+			//gc.lastpage = gc.page;
 			gc.page++;
 		}
 	}

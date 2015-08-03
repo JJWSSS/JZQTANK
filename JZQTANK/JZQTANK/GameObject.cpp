@@ -262,7 +262,6 @@ void Bullet::SpriteDraw()
 		//D3DXVECTOR3 pos(x, y, 0);
 		sprite->Draw(image, &rect, NULL, NULL, color);
 		sprite->End();
-
 	}
 	gc.d3ddev->EndScene();
 	gc.d3ddev->Present(NULL, NULL, NULL, NULL);
