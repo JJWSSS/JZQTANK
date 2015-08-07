@@ -14,8 +14,12 @@
 
 #define MainTankMove 95
 #define STARTX 371
-#define STARTY 144
+#define STARTY 114
+#define ENDX 995
+#define ENDY 738
 
+void MyTankAnimation();
+void ImageDraw(int frame, int columns, int environment, int wid, int hei, float x, float y);
 bool GameInit();
 bool SurfaceInit();
 void GameDraw();

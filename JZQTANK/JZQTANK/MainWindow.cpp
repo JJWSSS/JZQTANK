@@ -1,6 +1,8 @@
 //#include "DirectX.h"
 #include "Sprite.h"
 #include "GameControl.h"
+#include <time.h>
+using namespace std;
 
 extern DirectX gc;
 
@@ -40,7 +42,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		gc.SCREENW, gc.SCREENH, NULL, NULL, hInstance, NULL);
 
 	if (gc.window == 0)return 0;
-	gc.FullorWindowed();
+	//gc.FullorWindowed();
 
 	ShowWindow(gc.window, nCmdShow);
 	UpdateWindow(gc.window);
@@ -49,29 +51,41 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if (!GameInit())return 10;
 	//if (!SurfaceInit())return 11;
 	//GameDraw();
+	int s = 0;
 	while (!gc.gameover)
 	{
-		if (PeekMessage(&gc.message, NULL, 0, 0, PM_REMOVE))
+		if ((int)GetTickCount() > s )
 		{
-			TranslateMessage(&gc.message);
-			DispatchMessage(&gc.message);
-		}
-		if (gc.lastpage != gc.page)
-		{
-			if (!SurfaceInit())
+			s = (int)GetTickCount();
+			if (PeekMessage(&gc.message, NULL, 0, 0, PM_REMOVE))
 			{
-				gc.gameover = true;
+				TranslateMessage(&gc.message);
+				DispatchMessage(&gc.message);
+			}
+			if (gc.lastpage != gc.page)
+			{
+				if (!SurfaceInit())
+				{
+					gc.gameover = true;
+				}
 			}
 			if (!TSpriteInit())
 			{
 				gc.gameover = true;
 			}
+			if(gc.page>0)
+			{ 
+				RECT r;
+				r.left = STARTX;
+				r.top = STARTY;
+				r.right = ENDX;
+				r.bottom = ENDY;
+				gc.d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(150,150,150), 0, 0); 
+				gc.d3ddev->Clear(1, (D3DRECT*)&r, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 0, 0);
+			}
+			GameDraw();
+			GameInput();
 		}
-		gc.dinputdev->GetDeviceState(sizeof(gc.keys), (LPVOID)gc.keys);
-		//if (!SurfaceInit())gc.gameover == true;
-		GameDraw();
-		GameInput();
 	}
-	//while (1) {};
 	return gc.message.wParam;
 }

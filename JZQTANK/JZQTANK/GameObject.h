@@ -14,25 +14,30 @@ public:
 	float velx, vely;
 	int type, lastmovement;
 	int environment;
+	int f, c;
+	int lives;
 
 	//void SpriteTransform();
 	RECT GetNowRECT();
 	Tank();
+	void ProtectAnimation();
 	void SpriteDraw();
 	void SpriteDraw(int w);
 	virtual void StartAnimation();
 	virtual ~Tank();
-	int HitTest(Sprite sprite1, Sprite sprite2);
+	int HitTest(RECT rc);
 };
 
 class MyTank :public Tank
 {
 public:
 	int level;
+	int move;
+	int bulletnum;
 
 	MyTank();
 	~MyTank();
-	void Move();
+	//void Move();
 };
 
 class EnemyTank:public Tank

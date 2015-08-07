@@ -1,5 +1,7 @@
 #include "DirectX.h"
 
+extern float scaling;
+
 DirectX::DirectX() :d3d(NULL), d3ddev(NULL), backbuffer(NULL), surface(NULL), di(NULL), dinputdev(NULL),
 SCREENW(1366), SCREENH(768), fullorwindowed(true), gameover(false), page(0),APPTITLE(TEXT("JZQTANK")),lastpage(-1)
 {}
@@ -71,8 +73,8 @@ bool DirectX::D3DInit()
 
 	//create surface
 	HRESULT result = d3ddev->CreateOffscreenPlainSurface(
-		SCREENW,                //width of the surface
-		SCREENH,                //height of the surface
+		224*scaling,                //width of the surface
+		32*scaling,                //height of the surface
 		D3DFMT_X8R8G8B8,    //surface format
 		D3DPOOL_DEFAULT,    //memory pool to use
 		&surface,           //pointer to the surface
